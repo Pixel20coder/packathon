@@ -1,0 +1,30 @@
+{
+  "name": "packathon",
+  "version": "1.0.0",
+  "description": "EcoSachet - Biodegradable Multi-Layer Packaging Showcase",
+  "main": "dist/app3d.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pixel20coder/packathon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Pixel20coder/packathon/issues"
+  },
+  "homepage": "https://github.com/Pixel20coder/packathon#readme",
+  "devDependencies": {
+    "@types/three": "^0.184.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "three": "^0.184.0"
+  }
+}

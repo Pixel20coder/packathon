@@ -6,6 +6,7 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Decomposition-60--120%20Days-6BCB77?style=for-the-badge" alt="Decomposition">
   <img src="https://img.shields.io/badge/Plastic%20Free-100%25-4ECDC4?style=for-the-badge" alt="Plastic Free">
   <img src="https://img.shields.io/badge/Cost-₹0.45%20Per%20Sachet-FFD93D?style=for-the-badge&logoColor=black" alt="Cost">
@@ -55,8 +56,8 @@ This interactive showcase website includes:
 
 | Technology | Purpose |
 |------------|---------|
+| **TypeScript** | Type-safe source code (strict mode) |
 | **HTML5 / CSS3** | Structure & styling |
-| **Vanilla JavaScript** | Core logic & interactions |
 | **Three.js** | 3D product visualization & degradation simulation |
 | **GSAP + ScrollTrigger** | Scroll-based animations |
 | **Google Fonts (Outfit + Inter)** | Typography |
@@ -65,10 +66,14 @@ This interactive showcase website includes:
 
 ```
 packathon/
-├── index.html        # Main HTML page
-├── styles.css        # All styles & responsive design
-├── script.js         # Core JS — animations, particles, counters
-├── app3d.js          # Three.js — 3D sachet, layers, degradation
+├── index.html          # Main HTML page
+├── styles.css          # All styles & responsive design
+├── tsconfig.json       # TypeScript configuration (strict mode)
+├── package.json        # Dependencies & build scripts
+├── src/
+│   ├── script.ts       # Core TS — animations, particles, counters
+│   └── app3d.ts        # Three.js TS — 3D sachet, layers, degradation
+├── dist/               # Compiled JavaScript output (git-ignored)
 └── assets/
     ├── hero.png          # Hero section fallback image
     ├── layers.png        # Layer cross-section fallback
@@ -83,9 +88,16 @@ Simply open `index.html` in a modern browser:
 ```bash
 # Clone the repository
 git clone https://github.com/Pixel20coder/packathon.git
+cd packathon
+
+# Install dependencies
+npm install
+
+# Build TypeScript
+npm run build
 
 # Open in browser
-open packathon/index.html
+open index.html
 ```
 
 > **Note:** For the best 3D experience, use a WebGL-capable desktop browser (Chrome, Firefox, Edge). Mobile devices will display static image fallbacks.
