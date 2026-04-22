@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSachet – Biodegradable Multi-Layer Packaging for Pan Masala & Gutkha</title>
+    <meta name="description" content="EcoSachet is a biodegradable, plastic-free sachet packaging solution designed to replace non-recyclable plastic laminates. Multi-layer bio-composite structure with moisture resistance, durability, and rapid environmental degradation.">
+    <meta name="keywords" content="EcoSachet, biodegradable packaging, pan masala, gutkha, sustainable, eco-friendly, bio-composite, plastic-free">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- GSAP (regular scripts, available globally) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js import map (for ES module) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="leaf-spinner">
+                <svg viewBox="0 0 60 60" class="leaf-svg">
+                    <path d="M30 5 Q45 15 45 30 Q45 50 30 55 Q15 50 15 30 Q15 15 30 5Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M30 15 L30 45 M22 25 L30 30 M38 20 L30 28" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <p class="preloader-text">EcoSachet</p>
+        </div>
+    </div>
+
+    <!-- Floating Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <path d="M20 4 Q32 12 32 22 Q32 36 20 38 Q8 36 8 22 Q8 12 20 4Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20 12 L20 32 M14 20 L20 24 M26 16 L20 22" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span>EcoSachet</span>
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="#problem" class="nav-link">Problem</a>
+                <a href="#solution" class="nav-link">Solution</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#degradation" class="nav-link">Demo</a>
+                <a href="#impact" class="nav-link">Impact</a>
+                <a href="#roadmap" class="nav-link">Roadmap</a>
+                <a href="#contact" class="nav-link nav-cta">Get In Touch</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section id="hero" class="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge" data-animate="fade-up">
+                    <span class="badge-dot"></span>
+                    Sustainable Innovation
+                </div>
+                <h1 class="hero-title" data-animate="fade-up" data-delay="100">
+                    Packaging That
+                    <span class="gradient-text">Returns to Earth</span>
+                </h1>
+                <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
+                    A biodegradable, plastic-free sachet packaging solution replacing conventional
+                    non-recyclable plastic laminates. Multi-layer bio-composite structure delivering
+                    moisture resistance, durability, and rapid environmental degradation.
+                </p>
+                <div class="hero-actions" data-animate="fade-up" data-delay="300">
+                    <a href="#solution" class="btn btn-primary">
+                        Explore Solution
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#degradation" class="btn btn-outline">
+                        Watch It Decompose
+                    </a>
+                </div>
+                <div class="hero-stats" data-animate="fade-up" data-delay="400">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="60">0</span><span class="stat-suffix">–120</span>
+                        <span class="stat-label">Days to Decompose</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Plastic Free</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">₹0.45</span>
+                        <span class="stat-label">Per Sachet</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HERO VISUAL — 3D on desktop, static image fallback on mobile -->
+            <div class="hero-visual" data-animate="fade-left" data-delay="200">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-glow"></div>
+
+                    <!-- Three.js canvas container -->
+                    <div id="hero-3d-container" class="hero-3d-canvas"></div>
+
+                    <!-- Static fallback (shown on mobile or no-WebGL) -->
+                    <div class="hero-image-fallback">
+                        <img src="assets/hero.png" alt="EcoSachet biodegradable packaging" class="hero-image">
+                    </div>
+
+                    <div class="floating-tag tag-1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                        Biodegradable
+                    </div>
+                    <div class="floating-tag tag-2">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Food Safe
+                    </div>
+                    <div class="floating-tag tag-3">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+                        Heat Sealable
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" data-animate="fade-up" data-delay="600">
+            <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ PROBLEM ═══════════════════ -->
+    <section id="problem" class="section section-problem">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">The Crisis</span>
+                <h2 class="section-title">Billions of Sachets.<br><span class="text-danger">Zero Solutions.</span></h2>
+                <p class="section-desc">Pan masala and gutkha industries generate billions of single-use plastic sachets annually. These non-biodegradable, multi-layer plastic structures persist in our environment for over 100 years.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-image-card" data-animate="fade-right">
+                    <img src="assets/problem.png" alt="Plastic sachet pollution" class="problem-img">
+                    <div class="problem-image-overlay">
+                        <span class="overlay-stat">100+ Years</span>
+                        <span class="overlay-text">to decompose in nature</span>
+                    </div>
+                </div>
+                <div class="problem-cards" data-animate="fade-left">
+                    <div class="problem-card" data-animate="fade-up" data-delay="100">
+                        <div class="problem-card-icon icon-persist">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div><h3>Persistent Pollution</h3><p>Plastic sachets persist in the environment for over 100 years, contaminating soil and water systems.</p></div>
+                    </div>
+                    <div class="problem-card" data-animate="fade-up" data-delay="200">
+                        <div class="problem-card-icon icon-recycle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 19H4.815a1.83 1.83 0 01-1.57-.881 1.785 1.785 0 01-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 001.556-.89 1.784 1.784 0 00-.009-1.78l-3.96-6.83"/><path d="M16.5 5l-4.965 8.59"/><path d="M7.196 9.5L3.1 16.335M16.5 5h-5l2.57 4.455"/></svg>
+                        </div>
+                        <div><h3>Non-Recyclable</h3><p>Multi-layer laminated plastic structures make recycling virtually impossible with current technology.</p></div>
+                    </div>
+                    <div class="problem-card" data-animate="fade-up" data-delay="300">
+                        <div class="problem-card-icon icon-litter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </div>
+                        <div><h3>High Littering Rate</h3><p>Small form factor leads to widespread littering — sachets are the #1 category of plastic waste found in urban areas.</p></div>
+                    </div>
+                    <div class="problem-card" data-animate="fade-up" data-delay="400">
+                        <div class="problem-card-icon icon-cost">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                        </div>
+                        <div><h3>No Viable Alternatives</h3><p>Current alternatives fail to match cost-efficiency, usability, and manufacturability of plastic sachets.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ SOLUTION ═══════════════════ -->
+    <section id="solution" class="section section-solution">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Our Innovation</span>
+                <h2 class="section-title">Multi-Layer <span class="gradient-text">Bio-Composite</span> Architecture</h2>
+                <p class="section-desc">A three-layer biodegradable structure engineered to replicate and exceed plastic laminate performance while ensuring complete environmental decomposition. <strong>Scroll to explode the layers.</strong></p>
+            </div>
+            <div class="layers-showcase">
+                <div class="layers-image" data-animate="fade-right">
+                    <!-- Three.js exploded layer view (desktop) -->
+                    <div id="layer-3d-container" class="layer-3d-canvas"></div>
+                    <!-- Static fallback -->
+                    <div class="layers-fallback">
+                        <img src="assets/layers.png" alt="Three-layer bio-composite cross-section" class="layers-img">
+                    </div>
+                </div>
+                <div class="layers-details" data-animate="fade-left">
+                    <div class="layer-card layer-1-card" data-animate="fade-up" data-delay="100">
+                        <div class="layer-number">01</div>
+                        <div class="layer-info">
+                            <div class="layer-tag outer">Outer Layer</div>
+                            <h3>Kraft Paper / Bamboo Fiber</h3>
+                            <p>Provides structural strength, excellent printability for branding, and serves as the primary protective barrier.</p>
+                            <div class="layer-props">
+                                <span class="prop">🏗️ Structural</span>
+                                <span class="prop">🖨️ Printable</span>
+                                <span class="prop">🎨 Brandable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layer-card layer-2-card" data-animate="fade-up" data-delay="200">
+                        <div class="layer-number">02</div>
+                        <div class="layer-info">
+                            <div class="layer-tag barrier">Barrier Layer</div>
+                            <h3>Bio-Coating (PLA / PHA / Shellac)</h3>
+                            <p>Core innovation — delivers advanced moisture and oxygen resistance using bio-derived coating materials.</p>
+                            <div class="layer-props">
+                                <span class="prop">💧 Moisture Barrier</span>
+                                <span class="prop">🛡️ Oxygen Shield</span>
+                                <span class="prop">🌿 Bio-derived</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layer-card layer-3-card" data-animate="fade-up" data-delay="300">
+                        <div class="layer-number">03</div>
+                        <div class="layer-info">
+                            <div class="layer-tag inner">Inner Layer</div>
+                            <h3>Starch-Based Biopolymer Film</h3>
+                            <p>Food-safe sealant layer enabling heat-sealing compatibility with existing FFS packaging machines.</p>
+                            <div class="layer-props">
+                                <span class="prop">🔥 Heat Sealable</span>
+                                <span class="prop">🍽️ Food Safe</span>
+                                <span class="prop">♻️ Compostable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ FEATURES ═══════════════════ -->
+    <section id="technology" class="section section-tech">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Capabilities</span>
+                <h2 class="section-title">Engineered for <span class="gradient-text">Performance</span></h2>
+                <p class="section-desc">EcoSachet matches every functional requirement of conventional plastic sachets while exceeding environmental standards.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-animate="fade-up" data-delay="0">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4C14 4 8 12 8 24s6 20 16 20 16-8 16-20S34 4 24 4z"/><path d="M24 14v10l6 4"/></svg>
+                    </div>
+                    <h3>60–120 Day Decomposition</h3>
+                    <p>Fully biodegrades within 60 to 120 days, leaving zero microplastic residue in the environment.</p>
+                </div>
+                <div class="feature-card" data-animate="fade-up" data-delay="100">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 44c-8-6-16-12-16-22C8 12 15 6 24 6s16 6 16 16c0 10-8 16-16 22z"/><path d="M18 22l4 4 8-8"/></svg>
+                    </div>
+                    <h3>Moisture Resistant</h3>
+                    <p>Advanced bio-coating barrier prevents moisture ingress, supporting a 3–6 month shelf life.</p>
+                </div>
+                <div class="feature-card" data-animate="fade-up" data-delay="200">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="32" height="32" rx="4"/><path d="M20 24l4-8 4 8M16 32h16M22 24h4"/></svg>
+                    </div>
+                    <h3>Heat Sealable</h3>
+                    <p>Compatible with existing Form-Fill-Seal (FFS) machines with minimal calibration adjustments.</p>
+                </div>
+                <div class="feature-card" data-animate="fade-up" data-delay="300">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8l-4 8h32l-4-8z"/><rect x="8" y="16" width="32" height="24" rx="2"/><path d="M18 24h12M18 30h8"/></svg>
+                    </div>
+                    <h3>High-Speed Compatible</h3>
+                    <p>Supports high-speed packaging lines used in FMCG manufacturing without workflow changes.</p>
+                </div>
+                <div class="feature-card" data-animate="fade-up" data-delay="400">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 24C6 14 14 6 24 6s18 8 18 18-8 18-18 18S6 34 6 24z"/><path d="M17 24l5 5L33 19"/></svg>
+                    </div>
+                    <h3>Food Safe</h3>
+                    <p>Inner starch-based biopolymer film meets food-grade safety standards for direct product contact.</p>
+                </div>
+                <div class="feature-card" data-animate="fade-up" data-delay="500">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4v8M4 24h8M36 24h8M24 36v8"/><path d="M10 10l6 6M32 10l-6 6M10 38l6-6M32 38l-6-6"/><circle cx="24" cy="24" r="6"/></svg>
+                    </div>
+                    <h3>Easy Tear Design</h3>
+                    <p>Optimized tear mechanics for consumer convenience — identical usability to traditional sachets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ PROCESS ═══════════════════ -->
+    <section class="section section-process">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Manufacturing</span>
+                <h2 class="section-title">From Raw Material to <span class="gradient-text">Filled Sachet</span></h2>
+                <p class="section-desc">Our manufacturing process integrates seamlessly with existing packaging infrastructure, requiring only minor adjustments.</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-line"></div>
+                <div class="process-step" data-animate="fade-up" data-delay="0">
+                    <div class="step-circle">1</div>
+                    <div class="step-content"><h4>Raw Material Preparation</h4><p>Sourcing kraft paper, bio-polymers (PLA/PHA), and starch-based films from certified suppliers.</p></div>
+                </div>
+                <div class="process-step" data-animate="fade-up" data-delay="100">
+                    <div class="step-circle">2</div>
+                    <div class="step-content"><h4>Layer Lamination</h4><p>Roll-to-roll coating technique bonds the three bio-composite layers with optimized adhesion.</p></div>
+                </div>
+                <div class="process-step" data-animate="fade-up" data-delay="200">
+                    <div class="step-circle">3</div>
+                    <div class="step-content"><h4>Roll Formation</h4><p>Laminated material wound into packaging rolls compatible with standard FFS machines.</p></div>
+                </div>
+                <div class="process-step" data-animate="fade-up" data-delay="300">
+                    <div class="step-circle">4</div>
+                    <div class="step-content"><h4>FFS Machine Feeding</h4><p>Rolls fed into existing Form-Fill-Seal machines with calibrated sealing temperature profiles.</p></div>
+                </div>
+                <div class="process-step" data-animate="fade-up" data-delay="400">
+                    <div class="step-circle">5</div>
+                    <div class="step-content"><h4>Filling & Sealing</h4><p>Products filled and heat-sealed at optimized temperatures for biodegradable film integrity.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ DEGRADATION DEMO ═══════════════════ -->
+    <section id="degradation" class="section section-degradation">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Interactive Demo</span>
+                <h2 class="section-title">Watch It <span class="gradient-text">Return to Earth</span></h2>
+                <p class="section-desc">Experience EcoSachet's biodegradation process. Drag the slider to simulate 120 days of natural decomposition — with dissolve, color shift, and new growth.</p>
+            </div>
+            <div class="degradation-showcase" data-animate="fade-up" data-delay="100">
+                <div class="degradation-canvas-wrap">
+                    <div id="degradation-3d-container" class="degradation-canvas">
+                        <!-- Fallback -->
+                        <div class="degradation-fallback">
+                            <img src="assets/decomposition.png" alt="Decomposition process">
+                        </div>
+                    </div>
+                </div>
+                <div class="degradation-controls">
+                    <div class="slider-container">
+                        <div class="slider-header">
+                            <span class="slider-label-text">Day</span>
+                            <span class="day-counter" id="degradation-day">0</span>
+                        </div>
+                        <input type="range" id="degradation-slider" min="0" max="120" value="0" class="custom-slider">
+                        <div class="slider-marks">
+                            <span>0</span><span>30</span><span>60</span><span>90</span><span>120</span>
+                        </div>
+                    </div>
+                    <div class="degradation-status-wrap">
+                        <span class="status-dot"></span>
+                        <span class="degradation-status-text" id="degradation-status">Freshly Packaged</span>
+                    </div>
+                    <div class="degradation-facts">
+                        <div class="fact-item"><span class="fact-icon">🌱</span><span>Zero microplastic residue</span></div>
+                        <div class="fact-item"><span class="fact-icon">🌍</span><span>Returns nutrients to soil</span></div>
+                        <div class="fact-item"><span class="fact-icon">💚</span><span>60–120 day full decomposition</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ IMPACT ═══════════════════ -->
+    <section id="impact" class="section section-impact">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Environmental Impact</span>
+                <h2 class="section-title">From Pollution to <span class="gradient-text">Regeneration</span></h2>
+                <p class="section-desc">EcoSachet doesn't just reduce harm — it actively contributes to environmental recovery through complete biodegradation.</p>
+            </div>
+            <div class="impact-showcase">
+                <div class="impact-visual" data-animate="fade-right">
+                    <img src="assets/decomposition.png" alt="Decomposition cycle of EcoSachet" class="impact-img">
+                </div>
+                <div class="impact-metrics" data-animate="fade-left">
+                    <div class="metric-card" data-animate="fade-up" data-delay="100">
+                        <div class="metric-visual">
+                            <div class="progress-ring" data-progress="100">
+                                <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fill"/></svg>
+                                <span class="ring-value">0%</span>
+                            </div>
+                        </div>
+                        <div><h4>Zero Microplastics</h4><p>Leaves no microplastic residue upon decomposition</p></div>
+                    </div>
+                    <div class="metric-card" data-animate="fade-up" data-delay="200">
+                        <div class="metric-visual">
+                            <div class="progress-ring" data-progress="85">
+                                <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fill"/></svg>
+                                <span class="ring-value">85%</span>
+                            </div>
+                        </div>
+                        <div><h4>Lower Carbon Footprint</h4><p>85% reduction compared to conventional plastic sachets</p></div>
+                    </div>
+                    <div class="metric-card" data-animate="fade-up" data-delay="300">
+                        <div class="metric-visual">
+                            <div class="progress-ring" data-progress="95">
+                                <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fill"/></svg>
+                                <span class="ring-value">95%</span>
+                            </div>
+                        </div>
+                        <div><h4>Landfill Reduction</h4><p>Composts naturally, drastically reducing landfill accumulation</p></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Comparison -->
+            <div class="comparison-table" data-animate="fade-up">
+                <h3 class="comparison-title">Plastic vs EcoSachet</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-header"><span>Parameter</span><span class="plastic-label">Plastic Sachet</span><span class="eco-label">EcoSachet</span></div>
+                    <div class="comparison-row"><span>Decomposition Time</span><span class="plastic-val">100+ Years</span><span class="eco-val">60–120 Days ✓</span></div>
+                    <div class="comparison-row"><span>Microplastic Residue</span><span class="plastic-val">Yes</span><span class="eco-val">None ✓</span></div>
+                    <div class="comparison-row"><span>Recyclable</span><span class="plastic-val">No</span><span class="eco-val">Compostable ✓</span></div>
+                    <div class="comparison-row"><span>Food Safe</span><span class="plastic-val">Variable</span><span class="eco-val">Certified ✓</span></div>
+                    <div class="comparison-row"><span>Machine Compatible</span><span class="plastic-val">Yes</span><span class="eco-val">Yes ✓</span></div>
+                    <div class="comparison-row"><span>Cost Per Sachet</span><span class="plastic-val">₹0.20–0.40</span><span class="eco-val">₹0.45–0.55</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ ROADMAP ═══════════════════ -->
+    <section id="roadmap" class="section section-roadmap">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Scalability</span>
+                <h2 class="section-title">Our Path to <span class="gradient-text">Market Impact</span></h2>
+                <p class="section-desc">A structured approach from prototype validation to industrial-scale deployment across FMCG sectors.</p>
+            </div>
+            <div class="roadmap-grid">
+                <div class="roadmap-card active" data-animate="fade-up" data-delay="0">
+                    <div class="roadmap-phase">Phase 1</div><div class="roadmap-status current">Current</div>
+                    <h3>Prototype Validation</h3>
+                    <ul><li>Wax-coated / bio-coated paper sachet</li><li>Water resistance demonstration</li><li>Heat sealing proof of concept</li><li>Decomposition testing</li></ul>
+                </div>
+                <div class="roadmap-card" data-animate="fade-up" data-delay="100">
+                    <div class="roadmap-phase">Phase 2</div><div class="roadmap-status">Q3 2026</div>
+                    <h3>Pilot Manufacturing</h3>
+                    <ul><li>Partner with small manufacturers</li><li>FFS machine compatibility testing</li><li>Shelf-life validation studies</li><li>Regulatory compliance certification</li></ul>
+                </div>
+                <div class="roadmap-card" data-animate="fade-up" data-delay="200">
+                    <div class="roadmap-phase">Phase 3</div><div class="roadmap-status">2027</div>
+                    <h3>Industrial Scale Rollout</h3>
+                    <ul><li>Mass production line setup</li><li>FMCG brand partnerships</li><li>Cost optimization through scale</li><li>National distribution network</li></ul>
+                </div>
+                <div class="roadmap-card" data-animate="fade-up" data-delay="300">
+                    <div class="roadmap-phase">Phase 4</div><div class="roadmap-status">2028+</div>
+                    <h3>FMCG Expansion</h3>
+                    <ul><li>Food & pharmaceutical packaging</li><li>Edible/dissolvable film R&D</li><li>Seed-infused biodegradable packaging</li><li>Smart packaging with traceability</li></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ COST ═══════════════════ -->
+    <section id="cost" class="section section-cost">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Economics</span>
+                <h2 class="section-title">Cost-Effective <span class="gradient-text">Sustainability</span></h2>
+                <p class="section-desc">Our multi-layer bio-composite is engineered for manufacturing scale, with clear pathways to cost parity through optimization and subsidies.</p>
+            </div>
+            <div class="cost-breakdown" data-animate="fade-up">
+                <div class="cost-visual">
+                    <div class="cost-donut">
+                        <svg viewBox="0 0 200 200" class="donut-chart">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="30"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#6BCB77" stroke-width="30" stroke-dasharray="113 389" stroke-dashoffset="0" class="donut-seg seg-1"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#4ECDC4" stroke-width="30" stroke-dasharray="150 352" stroke-dashoffset="-113" class="donut-seg seg-2"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#FFD93D" stroke-width="30" stroke-dasharray="113 389" stroke-dashoffset="-263" class="donut-seg seg-3"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#FF6B6B" stroke-width="30" stroke-dasharray="126 376" stroke-dashoffset="-376" class="donut-seg seg-4"/>
+                        </svg>
+                        <div class="donut-center"><span class="donut-total">₹0.45</span><span class="donut-label">per sachet</span></div>
+                    </div>
+                </div>
+                <div class="cost-items">
+                    <div class="cost-item"><div class="cost-color" style="background:#6BCB77"></div><div class="cost-detail"><span class="cost-name">Outer Paper Layer</span><span class="cost-value">₹0.10</span></div><div class="cost-bar"><div class="cost-fill" style="width:22%;background:#6BCB77"></div></div></div>
+                    <div class="cost-item"><div class="cost-color" style="background:#4ECDC4"></div><div class="cost-detail"><span class="cost-name">Barrier Coating</span><span class="cost-value">₹0.15</span></div><div class="cost-bar"><div class="cost-fill" style="width:33%;background:#4ECDC4"></div></div></div>
+                    <div class="cost-item"><div class="cost-color" style="background:#FFD93D"></div><div class="cost-detail"><span class="cost-name">Inner Film</span><span class="cost-value">₹0.10</span></div><div class="cost-bar"><div class="cost-fill" style="width:22%;background:#FFD93D"></div></div></div>
+                    <div class="cost-item"><div class="cost-color" style="background:#FF6B6B"></div><div class="cost-detail"><span class="cost-name">Processing</span><span class="cost-value">₹0.10</span></div><div class="cost-bar"><div class="cost-fill" style="width:22%;background:#FF6B6B"></div></div></div>
+                </div>
+            </div>
+            <div class="optimization-cards" data-animate="fade-up">
+                <div class="opt-card"><div class="opt-icon">📦</div><h4>Bulk Sourcing</h4><p>Volume discounts on bio-materials through strategic supplier partnerships</p></div>
+                <div class="opt-card"><div class="opt-icon">🏭</div><h4>Local Manufacturing</h4><p>Reduced logistics costs with decentralized production facilities</p></div>
+                <div class="opt-card"><div class="opt-icon">⚡</div><h4>Process Automation</h4><p>Roll-to-roll coating & high-speed lamination for efficiency</p></div>
+                <div class="opt-card"><div class="opt-icon">🏛️</div><h4>Government Subsidies</h4><p>Leverage EPR credits and sustainable packaging incentives</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ RISKS ═══════════════════ -->
+    <section class="section section-risks">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Risk Management</span>
+                <h2 class="section-title">Challenges <span class="gradient-text">Addressed</span></h2>
+            </div>
+            <div class="risks-grid">
+                <div class="risk-card" data-animate="fade-up" data-delay="0"><div class="risk-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg><h4>Moisture Leakage</h4></div><div class="risk-mitigation"><span class="mitigation-label">Mitigation</span><p>Enhanced coating thickness and multi-material barrier optimization</p></div></div>
+                <div class="risk-card" data-animate="fade-up" data-delay="100"><div class="risk-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg><h4>Shelf Life Reduction</h4></div><div class="risk-mitigation"><span class="mitigation-label">Mitigation</span><p>Multi-layer optimization with PHA/chitosan-based barrier formulations</p></div></div>
+                <div class="risk-card" data-animate="fade-up" data-delay="200"><div class="risk-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg><h4>Higher Cost</h4></div><div class="risk-mitigation"><span class="mitigation-label">Mitigation</span><p>Scale manufacturing, government subsidies, and process automation</p></div></div>
+                <div class="risk-card" data-animate="fade-up" data-delay="300"><div class="risk-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg><h4>Machine Incompatibility</h4></div><div class="risk-mitigation"><span class="mitigation-label">Mitigation</span><p>Calibration adjustments and compatibility testing with FFS vendors</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ STAKEHOLDERS ═══════════════════ -->
+    <section class="section section-stakeholders">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">Ecosystem</span>
+                <h2 class="section-title">Who <span class="gradient-text">Benefits</span></h2>
+            </div>
+            <div class="stakeholders-grid">
+                <div class="stakeholder-card" data-animate="fade-up" data-delay="0"><div class="stakeholder-icon">🏢</div><h4>FMCG Manufacturers</h4><p>Low-cost, high-speed packaging compatibility with existing production lines. Meet regulatory requirements effortlessly.</p></div>
+                <div class="stakeholder-card" data-animate="fade-up" data-delay="100"><div class="stakeholder-icon">👤</div><h4>Consumers</h4><p>Identical convenience, durability, and usability. Experience guilt-free consumption with eco-conscious packaging.</p></div>
+                <div class="stakeholder-card" data-animate="fade-up" data-delay="200"><div class="stakeholder-icon">⚖️</div><h4>Regulatory Bodies</h4><p>Accelerates compliance with single-use plastic bans and EPR mandates. Clear certification pathway.</p></div>
+                <div class="stakeholder-card" data-animate="fade-up" data-delay="300"><div class="stakeholder-icon">♻️</div><h4>Waste Management</h4><p>Dramatically reduces non-recyclable waste volume. Sachets compost naturally without special infrastructure.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ CTA ═══════════════════ -->
+    <section id="contact" class="section section-cta">
+        <div class="container">
+            <div class="cta-card" data-animate="fade-up">
+                <div class="cta-bg-elements"><div class="cta-circle cta-circle-1"></div><div class="cta-circle cta-circle-2"></div><div class="cta-circle cta-circle-3"></div></div>
+                <div class="cta-content">
+                    <span class="section-tag light">Join the Revolution</span>
+                    <h2>Ready to Replace Plastic?</h2>
+                    <p>Partner with us to bring biodegradable packaging to your product line. Whether you're a manufacturer, investor, or sustainability advocate — let's make it happen.</p>
+                    <div class="cta-actions">
+                        <a href="mailto:contact@ecosachet.in" class="btn btn-white">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                            Contact Us
+                        </a>
+                        <a href="#solution" class="btn btn-ghost">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <svg viewBox="0 0 40 40" class="logo-icon"><path d="M20 4 Q32 12 32 22 Q32 36 20 38 Q8 36 8 22 Q8 12 20 4Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 12 L20 32 M14 20 L20 24 M26 16 L20 22" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        <span>EcoSachet</span>
+                    </a>
+                    <p>Biodegradable Multi-Layer Packaging for a Cleaner Tomorrow.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col"><h4>Product</h4><a href="#solution">Solution</a><a href="#technology">Technology</a><a href="#cost">Pricing</a></div>
+                    <div class="footer-col"><h4>Company</h4><a href="#impact">Impact</a><a href="#roadmap">Roadmap</a><a href="#contact">Contact</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 EcoSachet. All rights reserved. Built for a sustainable future.</p></div>
+        </div>
+    </footer>
+
+    <!-- Regular scripts -->
+    <script src="script.js"></script>
+    <!-- Three.js module (uses importmap above) -->
+    <script type="module" src="app3d.js"></script>
+</body>
+</html>
